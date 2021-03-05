@@ -1,14 +1,15 @@
-import { Client } from "https://deno.land/x/mysql/mod.ts";
-const client = await new Client();
 
-function conexionOpen(){
-  client.connect({
-    hostname: "localhost",
-    username: "root",
-    db: "usuarios",
-    password: "ediJM26",
-  });
-}
+// import { Client } from "https://deno.land/x/mysql/mod.ts";
+
+// const client = await new Client();
+// function conexionOpen(){
+//   client.connect({
+//     hostname: "localhost",
+//     username: "root",
+//     db: "usuarios",
+//     password: "ediJM26",
+//   });
+// }
 
 const validarDatos = () => {
   let estadoNombre = true;
