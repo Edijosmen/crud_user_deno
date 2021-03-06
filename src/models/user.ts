@@ -14,5 +14,20 @@ export class UsuariosModel{
                 usuarios.correo,
                 usuarios.contrasenia]);
     }
+    async update(usuarios: UsuarioDTO){
+        await client.query(
+            'update persona set nombre = ?, apellido = ?, celular = ?,correo = ?, contrasena = ? WHERE idpersona=?',
+            [   usuarios.nombre,
+                usuarios.apellido,
+                usuarios.celular,
+                usuarios.correo,
+                usuarios.contrasenia,
+                usuarios.id,
+            ]);
+        
+    }
+    async eliminar(id:number){
+        await client.execute(`delete from persona where ?? = ?`, ["idpersona", id]);
+    }
 
 }

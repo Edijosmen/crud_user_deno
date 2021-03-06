@@ -3,7 +3,7 @@ import {UsuariosModel} from "./models/user.ts"
 import {UsuarioController} from "./controlers/usuarioControllers.ts"
 const usuarioModel = new UsuariosModel();
 const usuarioControler = new UsuarioController();
-const  validarDatos = () => {
+ export const  validarDatos = () => {
     let estadoNombre = true;
     let estadoApellido= true;
     let estadoCorreo = true;
@@ -131,35 +131,23 @@ const  validarDatos = () => {
           break;
       }
       case "2":{
-        const [nombre,apellido,celular,correo,contrasena] = validarDatos();
-        await usuarioModel.crear({
-          nombre: nombre,
-          apellido: apellido,
-          celular: celular,
-          correo: correo,
-          contrasenia: contrasena,
-        });
-       console.log("usuario guardado correctamente");
+        await usuarioControler.crear()
           break;
       }
       case "3":{
         const usuarios = await usuarioModel.listar();
         console.log(usuarios);
         userId =parseInt(prompt("selecione el usuario ha Actualizar: ") as string);
-        await usuarioModel.update(userId);
-        const [nombre, apellido,celular,correo,contrasena] = validarDatos();
-        let result = await client.query(
-        'update persona set nombre = ?, apellido = ?, celular = ?,correo = ?, contrasena = ? WHERE idpersona=?',
-        [nombre,apellido,celular,correo,contrasena,userId]);
-        console.log(result);
+        await usuarioControler.update(userId)
           break;
       }
       case "4":{
          const usuarios = await usuarioModel.listar();
          console.log(usuarios);
          userId =parseInt(prompt("selecione el usuario ha eliminar: ") as string);
-         await client.execute(`delete from persona where ?? = ?`, ["idpersona", userId]);
-         console.log("el usario ha sido eliminado");
+        //  await client.execute(`delete from persona where ?? = ?`, ["idpersona", userId]);
+        //  console.log("el usario ha sido eliminado");
+        await usuarioControler.eliminarId(userId)
           break;
       }
       case "5":{
